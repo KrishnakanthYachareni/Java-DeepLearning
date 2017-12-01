@@ -1,4 +1,8 @@
 We know that Java Program runs on Java Virtual Machine (JVM). When we compile a Java Class, 
 it transforms it in the form of bytecode that is platform and machine independent compiled program 
 and store it as a .class file. After that when we try to use a Class, Java ClassLoader loads that class into memory.
-![alt text](https://github.com/KrishnakanthYachareni/Java-DeepLearning/blob/master/images/JVM.png)
+
+<p align="center">
+  <img src="https://github.com/KrishnakanthYachareni/Java-DeepLearning/blob/master/images/JVM.png" width="350"/>
+
+</p>
