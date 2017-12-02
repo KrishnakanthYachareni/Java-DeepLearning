@@ -73,7 +73,71 @@ com.java.deeplearning.ClassLoaderEx
 [Loaded java.lang.Shutdown from C:\Program Files\Java\jre1.8.0_45\lib\rt.jar]
 [Loaded java.lang.Shutdown$Lock from C:\Program Files\Java\jre1.8.0_45\lib\rt.jar] 
 ```
+
+### Difference Between Class.forName() and ClassLoader.loadClass()
+```Class.forName()``` and ```ClassLoader.loadClass()```, both the classes dynamically loading the classes to the classpath. However, there are small difference on initializing the classes at the time of loading and from where it is loaded.
+1. **Class.forName():** When we use this By default the classes are initialized at the time of loading. It means that static variables, static methods, static blocks in the classes are initialized. For an example JDBC class invoked by ```class.forName()```.
+2. **ClassLoader.loadClass():** By default, the classes are not initialized. The classes are loaded and made available in the classpath, the variables are initialized only when it is first time invoked by the caller.Let us taken an example to prove above points.
+Create DynamicLoading.java file
+```java
+/*@author
+Krishnakanth Yachareni*/
+package com.java.deeplearning;
+public class DynamicLoading {
+	static {
+		System.out.println("Static Initializer Called!!");
+	}
+}
+```
+After that create ClassLoaderEx.java with main.
+```java
+/*@author
+Krishnakanth Yachareni*/
+package com.java.deeplearning;
+public class ClassLoaderEx {
+	public static void main(String[] args) {
+		try {
+			System.out.println("Before Loading the forName...");
+			Class.forName("com.java.deeplearning.DynamicLoading"); //Line1
+			System.out.println("After Loading the forName...");
+			ClassLoader.getSystemClassLoader().loadClass("com.java.deeplearning.DynamicLoading"); //Line2
+			System.out.println("After Loading the loadClass....");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+```
+**output**
+```
+Before Loading the forName...
+Static Initializer Called!!
+After Loading the forName...
+After Loading the loadClass....
+```
+If we are not mention proper class name in Line1 & Line2 will throw an exception called as```ClassNotFoundException``` see in below
+```
+Before Loading the forName...
+Static Initializer Called!!
+After Loading the forName...
+java.lang.ClassNotFoundException: com.java.deeplearning.DynamicLoadin
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at com.java.deeplearning.ClassLoaderEx.main(ClassLoaderEx.java:12)
+```
+
 ### JVM ARCHITECTURE
+
 [
 ![jvm](https://user-images.githubusercontent.com/19643459/33497095-aaac15ae-d6f2-11e7-9ed0-7b76cef6f685.png)
 ](url)
+
+**Image copyrights@Krishnakanth Yachareni**
+### Referenes
+1. [Oracle JavaSE Document](https://docs.oracle.com/javase/tutorial/ext/basics/load.html).
+2. [javarevisited.blogspot.com/2012/12/how-classloader-works-in-java.html](javarevisited.blogspot.com/2012/12/how-classloader-works-in-java.html).
+
+Thank you all Happy Learning! :blush:
