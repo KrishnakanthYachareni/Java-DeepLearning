@@ -365,7 +365,7 @@ public class DoubleExample {
 }
 ```
 #### NOTE
-1. ```java
+```java
 package com.java.deeplearning;
 /* @author
  * Krishnakanth Yachareni 
@@ -480,3 +480,5 @@ public class BooleanExample {
 ### References
 1. [Oracle Document JavaSE](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
 2. [Geeks for Geeks](http://www.geeksforgeeks.org/data-types-in-java/)
+
+***Thank you all*** Happy Learning :blush:
