@@ -260,7 +260,7 @@ public class IntegerExample {
 		System.out.println(b.hashCode()); //31 (returns value not hash code)
 		System.out.println(a.hashCode()); 
 		/*Compiler error bcz hashcode is only 
-		for primitive types */
+		for Referenced/Object types */
 	}
 }
 
