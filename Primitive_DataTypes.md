@@ -429,7 +429,7 @@ package com.java.deeplearning;
 public class CharExample {
 	public static void main(String[] args) {
 		char a = 'a';
-		char b = (char)97;
+		char b = 97; // implicit conversion int to char
 		System.out.println(a); // a
 		System.out.println(b); // a
 		System.out.println((int) a); // ASCII value of a is 97
