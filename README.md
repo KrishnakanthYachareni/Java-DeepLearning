@@ -1,1 +1,4 @@
-This is my first task about Java class loading......let me given an good example to understanding about the things 
+### Deep Learning in Javaa
+This tutorial contains brief description about Java with very good examples.
+This is very helpful those who wants to learn about Java in deep...
+***Happy learning***
