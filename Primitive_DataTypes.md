@@ -178,7 +178,7 @@ public class ByteExample {
 Here, since d and e are declared ```final``` so the value of expression on the ```RHS``` is known at compile time, which is fixed at (10 + 20 = 30) and cannot vary. So, you don't need to typecast it explicitly.
 
 ```byte c = a + b; // a and b are not declared final ```
-Whereas, in this case, value of a and b are not declared ```final```. So, the value of expression is not known at compile time, rather is evaluated at runtime. So, you need to do an explicit cast.This is called as **Promotion**.
+Whereas, in this case, value of a and b are not declared ```final```. So, the value of expression is not known at compile time, rather is evaluated at runtime. So, you need to do an explicit cast.
 
 ```f+=g;``` and ```g++``` implicitly cast the result back to the type of ```f and g```.
 So if ```g``` is a ```byte```, then ```g++``` is also ```byte```; is not equivalent to ```g = g + 1```; - it's actually equivalent to ```g = (byte)(g + 1);```
