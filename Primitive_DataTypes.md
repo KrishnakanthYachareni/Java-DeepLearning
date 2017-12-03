@@ -379,8 +379,11 @@ public class DoubleExample {
         	System.out.println(b);
         	System.out.println(a == b);  //false
 	}
-} ```
+} 
+
+```
 Output
+
 ```
 0.30000000000000004
 0.3
@@ -408,6 +411,7 @@ public class DoubleExample {
 }
 ```
 Output
+
 ```
 1.7976931348623157E308
 9.43757177400795581800992129033101265E+327
