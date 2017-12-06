@@ -21,7 +21,7 @@ Primitive data are only single values; they have no special capabilities. There 
 | float  | 32 bit | 0.0f | 
 | double | 64 bit | 0.0d | 
 | char | 16 bits   | \u0000 |
-| boolean    | 1 bit | false | 
+| boolean    | 8 bits | false | 
 
 ### Binary representation in a memory
 1. **Positve Numbers Representation**
@@ -467,7 +467,7 @@ char m = l + 5;
 where ```l``` is a constant expression, the compiler can determine that the value of ```l```, which is ```97```, added to ```5```, which is ```102``` does fit in a ```char```. Because of this guarantee, Java can safely perform a narrowing conversion from ```int``` to ```char```.
 ###  8. boolean
 boolean data type represents only one bit of information either true or false . Values of type boolean are not converted implicitly or explicitly (with casts) to any other type. But the programmer can easily write conversion code.The result of conditional operator is boolean values.
-- Size: 1 bit
+- Size: 16 bits but generally size isn't precisely defined.
 - Value: true or false
 ```java
 package com.java.deeplearning;
