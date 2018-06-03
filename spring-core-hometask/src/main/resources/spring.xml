@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<!-- Setting Auditorium properties to the classpath -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:theaters.properties</value>
+			</list>
+		</property>
+		<property name="ignoreResourceNotFound" value="false" />
+	</bean>
+
+	<!-- Adding individual theaters properties to the respective theaters/auditorium -->
+
+	<!-- Auditorium 1 -->
+	<bean id="theaterOne" class="ua.epam.spring.hometask.domain.Auditorium">
+		<property name="name" value="${theaterOne.name}" />
+		<property name="numberOfSeats" value="${theaterOne.numOfSeats}" />
+		<property name="vipSeats" value="#{'${theaterOne.vipSeats}'.split(',')}" />
+	</bean>
+
+	<!-- Auditorium 2 -->
+	<bean id="theaterTwo" class="ua.epam.spring.hometask.domain.Auditorium">
+		<property name="name" value="${theaterTwo.name}" />
+		<property name="numberOfSeats" value="${theaterTwo.numOfSeats}" />
+		<property name="vipSeats" value="#{'${theaterTwo.vipSeats}'.split(',')}" />
+	</bean>
+
+	<!-- Auditorium 3 -->
+	<bean id="theaterThree" class="ua.epam.spring.hometask.domain.Auditorium"
+		p:name="${theaterThree.name}" p:numberOfSeats="${theaterThree.numOfSeats}"
+		p:vipSeats="#{'${theaterThree.vipSeats}'.split(',')}">
+	</bean>
+
+	<!-- Adding all auditoriums as list to the AuditoriumDao class -->
+	<bean id="auditoriumDAO" class="ua.epam.spring.hometask.dao.AuditoriumDao">
+		<constructor-arg>
+			<list>
+				<ref bean="theaterOne" />
+				<ref bean="theaterTwo" />
+				<ref bean="theaterThree" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<!-- Create beans for Event, Ticket, User -->
+	<bean id="eventDAO" class="ua.epam.spring.hometask.dao.EventDao" />
+	<bean id="ticketDAO" class="ua.epam.spring.hometask.dao.TicketDao" />
+	<bean id="userDAO" class="ua.epam.spring.hometask.dao.UserDao" />
+
+	<!-- Create the Auditorium Service beans by passing the AuditoriumDao -->
+	<bean id="auditoriumService"
+		class="ua.epam.spring.hometask.service.impl.AuditoriumServiceImpl">
+		<constructor-arg ref="auditoriumDAO" />
+	</bean>
+
+	<!-- Inner bean are prototypes, but if outer bean is singleton so the inner 
+		bean is created on outer bean initialization, which defacto makes them behave 
+		like singleton. -->
+	<bean id="discountService"
+		class="ua.epam.spring.hometask.service.impl.DiscountServiceImpl">
+		<constructor-arg>
+			<list>
+				<bean
+					class="ua.epam.spring.hometask.service.impl.discount.BirthdayDiscountStrategy" />
+				<bean
+					class="ua.epam.spring.hometask.service.impl.discount.Every10DiscountStrategy" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+
+	<!-- Create bean for BookingService by passing the Discount Service and 
+		TicketDao -->
+	<bean id="bookingService" class="ua.epam.spring.hometask.service.impl.BookingServiceImpl">
+		<constructor-arg ref="discountService" />
+		<constructor-arg ref="ticketDAO" />
+	</bean>
+
+	<!-- Create the bean for Event Service by EventDao -->
+	<bean id="eventService" class="ua.epam.spring.hometask.service.impl.EventServiceImpl">
+		<constructor-arg ref="eventDAO" />
+	</bean>
+
+	<!-- Create the bean for UserService by UserDao -->
+	<bean id="userService" class="ua.epam.spring.hometask.service.impl.UserServiceImpl">
+		<constructor-arg ref="userDAO" />
+	</bean>
+
+	<!-- Here main driver class(main) passing the all the Auditorium services 
+		objects as arguments -->
+	<bean id="app" class="ua.epam.spring.hometask.App">
+		<constructor-arg ref="userService" />
+		<constructor-arg ref="eventService" />
+		<constructor-arg ref="bookingService" />
+		<constructor-arg ref="auditoriumService" />
+	</bean>
+</beans>
