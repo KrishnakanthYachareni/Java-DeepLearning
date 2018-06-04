@@ -9,31 +9,26 @@ import ua.epam.spring.hometask.domain.Auditorium;
 
 /**
  * @author Yuriy_Tkach
- * 
- * 
- * Several auditoriums can be stored in separate property files or in a single file, 
- * information from them should be injected into the AuditoriumService
-
-	getAll(), getByName()
- * 
- * 
+ *     <p>Several auditoriums can be stored in separate property files or in a single file,
+ *     information from them should be injected into the AuditoriumService
+ *     <p>getAll(), getByName()
  */
 public interface AuditoriumService {
 
-    /**
-     * Getting all auditoriums from the system
-     * 
-     * @return set of all auditoriums
-     */
-    public @Nonnull Set<Auditorium> getAll();
+  /**
+   * Getting all auditoriums from the system
+   *
+   * @return set of all auditoriums
+   */
+  @Nonnull
+  Set<Auditorium> getAll();
 
-    /**
-     * Finding auditorium by name
-     * 
-     * @param name
-     *            Name of the auditorium
-     * @return found auditorium or <code>null</code>
-     */
-    public @Nullable Auditorium getByName(@Nonnull String name);
-
+  /**
+   * Finding auditorium by name
+   *
+   * @param name Name of the auditorium
+   * @return found auditorium or <code>null</code>
+   */
+  @Nullable
+  Auditorium getByName(@Nonnull String name);
 }

@@ -1,14 +1,10 @@
 package ua.epam.spring.hometask.domain;
 
-/**
- * @author Yuriy_Tkach
- */
+/** @author Yuriy_Tkach */
 public enum EventRating {
+  LOW,
 
-    LOW,
+  MID,
 
-    MID,
-
-    HIGH;
-
+  HIGH
 }

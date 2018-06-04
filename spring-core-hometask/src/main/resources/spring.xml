@@ -62,8 +62,8 @@
 		<constructor-arg ref="auditoriumDAO" />
 	</bean>
 
-	<!-- Inner bean are prototypes, but if outer bean is singleton so the inner 
-		bean is created on outer bean initialization, which defacto makes them behave 
+	<!-- Inner bean are prototypes, but if outer bean is singleton so the inner
+		bean is created on outer bean initialization, which defacto makes them behave
 		like singleton. -->
 	<bean id="discountService"
 		class="ua.epam.spring.hometask.service.impl.DiscountServiceImpl">
@@ -78,7 +78,7 @@
 	</bean>
 
 
-	<!-- Create bean for BookingService by passing the Discount Service and 
+	<!-- Create bean for BookingService by passing the Discount Service and
 		TicketDao -->
 	<bean id="bookingService" class="ua.epam.spring.hometask.service.impl.BookingServiceImpl">
 		<constructor-arg ref="discountService" />
@@ -95,7 +95,7 @@
 		<constructor-arg ref="userDAO" />
 	</bean>
 
-	<!-- Here main driver class(main) passing the all the Auditorium services 
+	<!-- Here main driver class(main) passing the all the Auditorium services
 		objects as arguments -->
 	<bean id="app" class="ua.epam.spring.hometask.App">
 		<constructor-arg ref="userService" />
